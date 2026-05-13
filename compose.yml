@@ -1,0 +1,37 @@
+services:
+
+  profile-db:
+    image: postgres:15-alpine
+    container_name: profile-db
+    environment:
+      POSTGRES_DB: profile_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - profile-db-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+
+  feedback-db:
+    image: postgres:15-alpine
+    container_name: feedback-db
+    environment:
+      POSTGRES_DB: feedback_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5436:5432"
+    volumes:
+      - feedback-db-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+
+volumes:
+  profile-db-data:
+  feedback-db-data:
+
+networks:
+  microservices-network:
+    driver: bridge
