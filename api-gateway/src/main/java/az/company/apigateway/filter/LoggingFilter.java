@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -41,8 +42,8 @@ public class LoggingFilter implements GlobalFilter, Ordered {
 
         return chain.filter(modifiedExchange).then(
                 Mono.fromRunnable(() -> {
-                    int statusCode = modifiedExchange.getResponse()
-                            .getStatusCode()
+                    int statusCode = Objects.requireNonNull(modifiedExchange.getResponse()
+                                    .getStatusCode())
                             .value();
 
                     log.info("<- [{}] Response Status {} | Path: {}",
