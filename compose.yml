@@ -18,13 +18,52 @@ services:
     image: postgres:15-alpine
     container_name: feedback-db
     environment:
-      POSTGRES_DB: feedback_db
+      POSTGRES_DB: feedback-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5436:5432"
     volumes:
       - feedback-db-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+
+  profile-service:
+    build: ./profile-service
+    container_name: profile-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://profile-db:5432/profile_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8081:8081"
+    depends_on:
+      - profile-db
+    networks:
+      - microservices-network
+
+  feedback-service:
+    build: ./feedback-service
+    container_name: feedback-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://feedback-db:5432/feedback_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8082:8082"
+    depends_on:
+      - feedback-db
+    networks:
+      - microservices-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - profile-service
+      - feedback-service
     networks:
       - microservices-network
 

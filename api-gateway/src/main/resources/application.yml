@@ -9,15 +9,16 @@ spring:
     gateway:
       routes:
         - id: profile-service
-          uri: http://localhost:8081
+          uri: http://profile-service:8081
           predicates:
             - Path=/api/v1/profiles/**
+
         - id: feedback-service
-          uri: http://localhost:8082
+          uri: http://feedback-service:8082
           predicates:
             - Path=/api/v1/feedback/**
 
-      globalcors:
+      global-cors:
         cors-configurations:
           '[/**]':
             allowedOrigins: "*"
