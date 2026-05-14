@@ -1,10 +1,7 @@
-package az.company.profileservice;
+package az.company.profileservice.exception;
 
 import az.company.profileservice.dto.response.ErrorResponse;
-import az.company.profileservice.exception.DuplicateEmailException;
-import az.company.profileservice.exception.ProfileNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
