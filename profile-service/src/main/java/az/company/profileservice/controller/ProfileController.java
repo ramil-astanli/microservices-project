@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/profiles")
+@RequestMapping(
+        value = "/v1/profiles",
+        produces = "application/vnd.profileapp+json"
+)
 @RequiredArgsConstructor
 @Tag(name = "Profile Management", description = "User profile management APIs")
 public class ProfileController {

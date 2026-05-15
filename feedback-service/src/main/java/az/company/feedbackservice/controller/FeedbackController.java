@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/feedback")
+@RequestMapping(value = "/v1/feedback",
+                produces = "application/vnd.feedbackapp+json")
 @RequiredArgsConstructor
 @Tag(name = "Feedback", description = "User feedback management APIs")
 public class FeedbackController {

@@ -7,20 +7,22 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        - id: profile-service
-          uri: http://profile-service:8081
-          predicates:
-            - Path=/api/v1/profiles/**
+      server:
+        webflux:
+          routes:
+            - id: profile-service
+              uri: http://profile-service:8081
+              predicates:
+                - Path=/api/v1/profiles,/api/v1/profiles/**
 
-        - id: feedback-service
-          uri: http://feedback-service:8082
-          predicates:
-            - Path=/api/v1/feedback/**
+            - id: feedback-service
+              uri: http://feedback-service:8082
+              predicates:
+                - Path=/api/v1/feedback,/api/v1/feedback/**
 
-      global-cors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+          global-cors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowedMethods: "*"
+                allowedHeaders: "*"
