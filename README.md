@@ -75,8 +75,8 @@ docker-compose up -d --build
 
 ## Swagger UI
 
-http://localhost:8081/swagger-ui.html  → Profile Service
-http://localhost:8082/swagger-ui.html  → Feedback Service
+http://localhost:8081/swagger-ui/index.html  → Profile Service
+http://localhost:8082/swagger-ui/index.html  → Feedback Service
 
 ## API Versioning
 
